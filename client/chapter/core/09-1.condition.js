@@ -55,3 +55,10 @@ let goingToWatchMovie = 'yes';
 // 멀티 조건부 연산자 식
 
 const message = didWatchMovie === 'yes' ? '영화 재밌더라 한번 봐봐' : goingToWatchMovie === 'yes' ? '언제 볼까? 재밌겠다!!' : '그래...'
+
+//조건부 렌더링
+// function render(node, isActive) {
+//   const template = `
+//   <div>${}</div>`
+
+// }
