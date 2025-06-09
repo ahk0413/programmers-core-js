@@ -156,6 +156,23 @@ movePage(
   }
 )
 
+function getGeolocation(success){
+  let data;
+
+  navigator.geolocation.getCurrentPosition(function(so){
+
+    const data = so.coords.latitude;
+
+    success(data); // arguments
+  })
+}
+
+// promise
+
+// getGeolocation(function(value){
+//   console.log(value);
+// })
+
 
 // 함수 선언문 vs. 함수 (표현)식
 
@@ -163,3 +180,144 @@ movePage(
 // 즉시 실행 함수 (표현)식
 // Immediately Invoked Function Expression
 let IIFE;
+
+// encapsulation(캡슐화)
+const MASTER = (function(){
+
+  var uuid = 'zxasnzxj!@#asBd_12387zj$$!ak'
+
+  return {
+    getKey(){
+      return uuid
+    },
+    setKey(value){
+      uuid = value;
+    }
+  }
+})
+
+console.log(MASTER);
+
+console.clear();
+
+/* 다음 함수를 작성해봅시다. */
+
+// rem()
+
+function rem(pxValue, base = 16) {
+
+  if(!pxValue) {
+    throw new Error('rem 함수의 첫 번째 인수는 필수 입력 값 입니다.')
+  }
+
+  if(typeof base === 'string'){
+    throw new TypeError('rem 함수의 두 번째 인수는 숫자 타입 이어야 합니다.')
+  }
+
+  if (typeof pxValue === 'string') {
+    pxValue = parseInt(pxValue);
+  }
+
+  return pxValue / base + 'rem';
+}
+
+console.assert(rem(20) === '1.25rem');
+console.assert(rem('25px') === '1.5625rem');
+console.assert(rem('30px', 10) === '3rem');
+
+
+// 1. 함수의 이름
+// 2. 함수의 실행부 작성
+// 3. 매개변수 확인
+// 4. return value
+// 5. validation
+// 6. Test Driven Development(TDD)
+
+// setter function
+function setCss(node, prop, val){
+  if(typeof node === 'string') node = document.querySelector(node);
+
+  if(!(prop in document.body.style)) throw new ReferenceError('setCss 함수의 두 번째 인수는 유효한 css 속성 이어야 합니다.')
+  
+  if(!val) throw new Error('setCss 함수의 세 번째 인수는 필수 입력 값 입니다.')
+
+  node.style[prop] = val;
+}
+
+// setCss(first,'color','orange');
+
+// getter function
+function getCss(node, prop){
+
+  if(typeof node === 'string') node = document.querySelector(node);
+
+
+
+  if(!(prop in document.body.style)) throw new ReferenceError('setCss 함수의 두 번째 인수는 유효한 css 속성 이어야 합니다.')
+
+  return getComputedStyle(node)[prop];
+}
+
+const fontSize = getCss('.first','font-size')
+
+// console.log(fontSize);
+
+
+function css(node,prop,value){
+  /* if(!value){
+    getCss(node, prop)
+  }else {
+    setCss(node,prop,value)
+  } */
+
+  !value ? getCss(node,prop) : setCss(node,prop,value);
+}
+css('.first','color') // get
+css('.first','color','blue')  // set
+
+// 화살표 함수
+const _css = (node,prop,value) => !value ? getCss(node.prop) : setCss(node,prop,value);
+
+// 캡슐화 => 오늘날엔 많이 안씀.
+(function(){
+    function setCss(node, prop, val){
+      if(typeof node === 'string') node = document.querySelector(node);
+
+      if(!(prop in document.body.style)) throw new ReferenceError('setCss 함수의 두 번째 인수는 유효한 css 속성 이어야 합니다.')
+      
+      if(!val) throw new Error('setCss 함수의 세 번째 인수는 필수 입력 값 입니다.')
+
+      node.style[prop] = val;
+    }
+
+    setCss('.first','color','orange');
+
+    // getter function
+    function getCss(node, prop){
+
+      if(typeof node === 'string') node = document.querySelector(node);
+
+
+
+      if(!(prop in document.body.style)) throw new ReferenceError('setCss 함수의 두 번째 인수는 유효한 css 속성 이어야 합니다.')
+
+      return getComputedStyle(node)[prop];
+    }
+
+    const fontSize = getCss('.first','font-size')
+
+    // console.log(fontSize);
+
+
+    function css(node,prop,value){
+      /* if(!value){
+        getCss(node, prop)
+      }else {
+        setCss(node,prop,value)
+      } */
+
+      !value ? getCss(node,prop) : setCss(node,prop,value);
+    }
+
+    return css
+})()
