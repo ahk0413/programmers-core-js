@@ -9,29 +9,36 @@ const shopOrder = {
   menu: [
     { name: '통 새우 돈까스', price: 13000, count: 2 },
     { name: '치즈 돈까스', price: 10000, count: 1 },
+    { name: '간장 새우장', price: 15000, count: 3 },
   ],
-
+  
   totalPrice(){
-    // 메서드 안에서의 함수는 arrow function이 좋음
-     this.total = this.menu.reduce((acc,cur)=> acc + cur.price * cur.count,0);
+    this.total = this.menu.reduce((acc,cur)=> acc + cur.price * cur.count ,0);
 
-     return this.total
+    return this.total
   }
+ 
 };
 
 shopOrder.totalPrice();
 
+
 // menu안에 있는 product price의 총 합
-let total = 0;
-/* shopOrder.menu.forEach((item=>{
-  total += item.price * item.count
-}); */
+
+// console.log( 
+//   shopOrder.menu[0].price * shopOrder.menu[0].count +
+//   shopOrder.menu[1].price * shopOrder.menu[1].count
+// );
 
 
-/* shopOrder.menu.forEach(item => total += item.price * item.count); */
+// let total = 0;
 
-/* total = shopOrder.menu.reduce((acc, cur) => acc + cur.price * cur.count ,0);
- */
+// shopOrder.menu.forEach(item => total += item.price * item.count)
+
+// total = shopOrder.menu.reduce((acc,cur) =>  acc + cur.price * cur.count ,0)
+
+
+
 
 // 메서드와 this 
 // ※ this 참조는 런타임(실행) 중에 결정됩니다. 즉, 컨텍스트에 따라 달라집니다.
@@ -45,7 +52,8 @@ let total = 0;
 // 메서드 단축 구문
 
 
-// 일반 함수 (문/식)의 this vs. 화살표 함수 식의 this => window
+// 일반 함수 (문/식)의 this vs. 화살표 함수 식의 this
+
 
 const navigationMenu = {
   name: '글로벌 내비게이션',

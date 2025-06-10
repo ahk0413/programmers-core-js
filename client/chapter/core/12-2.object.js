@@ -27,28 +27,39 @@ console.log(messenger === conversationTool);
 
 const cloneObject = {};
 
-for(const key in message){
-  cloneObject[key]  = messenger[key];
+for(const key in messenger){
+  cloneObject[key] = messenger[key];
 }
 
-// console.log(cloneObject);
+// console.log( cloneObject );
+
+
 
 // 2. Object.assign()을 사용한 복사
 const copyObject = Object.assign({},messenger);
 
+
+
 // 3. 전개 연산자(...)를 사용한 복사
 const spreadObject = {...messenger};
 
+
 // 4. 객체를 복사해주는 유틸 함수 
+
+
 function copiedObject(obj){
   return Object.assign({},obj);
 }
 
-const _copiedObject = o => Object.assign({},o);
-const o = copiedObject(messenger)
+// const _copiedObject = o => Object.assign({},o);
+const _copiedObject = o => ({...o});
+
+const o = copiedObject(messenger);
 
 
-// 객체 병합(합성)
+// Object mixin pattern
+
+// 객체 병합(합성) 
 const cssMapA = {
   color: '#4b004b',
   margin: '0 auto',
@@ -62,8 +73,10 @@ const cssMapB = {
   color: '#3f9e97',
 };
 
-// let combinedCssMap = Object.assign({}, cssMap);
-let combinedCssMap ={...cssMapA, ...cssMapB};
+// let combinedCssMap = Object.assign({},cssMapA,cssMapB);
+let combinedCssMap = {...cssMapA,...cssMapB};
+
+console.log( combinedCssMap );
 
 
 // 중첩된 프로퍼티에 객체를 포함하는 객체 복사
@@ -79,12 +92,13 @@ const containerStyles = {
   },
 };
 
-let copiedContainerStyles ={
+let copiedContainerStyles = {
   ...containerStyles,
   ['max-width']:{
     ...containerStyles['max-width']
   }
 };
+
 
 
 // 1. 깊은 복사 유틸리티 함수
@@ -104,10 +118,9 @@ const deep = cloneDeep(containerStyles);
 
 
 /* 
-1.참조에 의한 객체 복사 (객체나 배열은 전부다 참조 복사가 됩니다.) 리액트 지양
-2.얕은 복사
-3.깊은 복사
-
+1. 참조에 의한 객체 복사 (객체나 배열은 전부다 참조 복사가 됩니다.) 리액트 지양
+2. 얕은 복사
+3. 깊은 복사 
 */
 
 // 2. Lodash 라이브러리 활용
