@@ -1,66 +1,105 @@
+
+
+
+
 function earth(){
+
   let water = true;
   let gravity = 10;
 
-  function tiger(value){
+  return function (value){
+
     water = value;
   }
 
-  return tiger;
+
 }
+
 
 const ufo = earth();
 
-ufo(false);
+
+ufo(false)
+
+
+// o_k 개념은 이해 했습니다. 근데, 어디다 써요 ?
+
+
 
 
 const button = document.querySelector('.btn');
 
-//IIFE
+// IIFE
+
 
 const handleClick = (() => {
-  
   let isClicked = false;
 
   return () => {
     if(!isClicked){
-  
       document.body.style.background = 'orange';
+
     }else{
       document.body.style.background = 'white';
     }
-  
+
     isClicked = !isClicked;
   }
+  
 })()
 
-button.addEventListener('click',handleClick);
+
+// button.addEventListener('click',handleClick);
+
+// document.querySelector('.first').addEventListener('click',() => {
+//   console.log('hit');
+  
+//   button.removeEventListener('click',handleClick);
+// })
 
 
-function bindEvent(node,eventtype,fn){
+
+
+function bindEvent(node,eventType,fn){
+
   if(typeof node === 'string') node = document.querySelector(node);
+  
+  node.addEventListener(eventType,fn);
 
-  node.addEventListener(eventtype,fn);
-
-  return () => node.removeEventListener(eventtype,fn);
+  return () => node.removeEventListener(eventType,fn);
 }
 
 const remove = bindEvent('.btn','click',handleClick);
 
+
 remove();
 
 
-function fn(init){
+
+
+
+
+function useState(init){
   let value = init;
 
   function read(){
+    // render()
     return value;
   }
+
   function write(newValue){
+    // render()
     value = newValue;
   }
 
-  return [read, write];
+  return [read,write];
+
 }
 
+
+
 const [value,setValue] = useState('hello');
+
+
+// read()
+// write()
