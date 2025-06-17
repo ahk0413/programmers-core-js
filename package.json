@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "live-server client --host=localhost --port=5500 --no-browser",
-    "serve": "node server/index.js"
+    "serve": "node server/index.js",
+    "lint": "eslint ./client/main.js"
   },
   "keywords": [],
   "author": "ah",
@@ -12,7 +13,8 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.27.0",
-    "eslint": "^9.27.0",
+    "eslint": "^9.29.0",
+    "exlint": "^0.1.6",
     "globals": "^16.2.0",
     "live-server": "^1.2.2",
     "prettier": "^3.5.3"
