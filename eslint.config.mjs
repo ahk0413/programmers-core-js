@@ -30,8 +30,6 @@ export default defineConfig([
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...types,
-        ...lib,
         gsap: true
       },
     },
