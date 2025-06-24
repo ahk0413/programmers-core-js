@@ -197,7 +197,7 @@ async function getData(){
 
   const src = data.sprites.other.showdown['front_default'];
 
-  insertLast(document.body,`<img src="${src}" alt="" />`)
+  insertLast(document.body,`<img class="pokemon" src="${src}" alt="" />`)
   
 }
 
